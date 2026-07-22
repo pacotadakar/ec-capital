@@ -15,13 +15,15 @@
             --gold-dark: #7a5c1e; --gold-mid: #b38728; --gold-bright: #e5c158; --gold-light: #fcf6ba;
             --star-blue: #6a8fd8; --star-blue-bright: #9db8ec; --magic-pink: #d68fc4; --magic-pink-bright: #eab3d8;
             --silver-mid: #9ca3af; --bg-0: #05060f; --bg-1: #0a0c1c; --bg-2: #101224; --border: #1b1d38;
+            --header-g1: #12132a; --header-g2: #0a0b1a; --header-border: #232544;
+            --card-g1: #1a1428; --card-g2: #16101f; --box-bg: #120d1e;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, 'SF Pro Display', sans-serif; }
         body { background: var(--bg-0); color: #fff; padding: 1.25rem; padding-bottom: 3rem; transition: background .25s, color .25s; }
 
         header {
-            background: linear-gradient(160deg, #12132a 0%, #0a0b1a 100%);
-            border: 1px solid #232544; border-bottom: 2px solid var(--gold-mid);
+            background: linear-gradient(160deg, var(--header-g1) 0%, var(--header-g2) 100%);
+            border: 1px solid var(--header-border); border-bottom: 2px solid var(--gold-mid);
             padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 1.1rem; border-radius: 10px; flex-wrap: wrap; gap: 0.65rem;
             box-shadow: 0 6px 32px rgba(179,135,40,0.1), inset 0 1px 0 rgba(255,255,255,0.04);
@@ -31,7 +33,14 @@
             content: '✦     ·        ✧      ·    ✦'; position: absolute; top: 6px; left: 0; right: 0;
             font-size: 8px; color: var(--gold-mid); opacity: 0.35; letter-spacing: 0.4rem;
             pointer-events: none; white-space: nowrap; overflow: hidden;
+            animation: twinkle 4.5s ease-in-out infinite;
         }
+        @keyframes twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.5; } }
+        @keyframes glowPulse {
+            0%,100% { box-shadow: 0 6px 32px rgba(179,135,40,0.1), inset 0 1px 0 rgba(255,255,255,0.04); }
+            50% { box-shadow: 0 6px 38px rgba(229,193,88,0.22), inset 0 1px 0 rgba(255,255,255,0.06); }
+        }
+        header { animation: glowPulse 5s ease-in-out infinite; }
         .logo-wrap { display: flex; align-items: center; }
         .logo-icon-img {
             width: 52px; height: 52px; border-radius: 13px; display: block;
@@ -52,19 +61,20 @@
         .cloud-status { font-size:0.63rem; font-weight:bold; padding:0.4rem 0.6rem; border-radius:5px;
             background:#16101f; border:1px solid #241c34; white-space:nowrap; }
         .tc-box { background:#16101f; border:1px solid #2b2340; padding:0.38rem 0.7rem; border-radius:6px; font-size:0.67rem; color:#444; }
-        .tc-box input { background:transparent; border:none; color:var(--gold-bright); font-weight:800; font-size:1rem; width:58px; text-align:right; outline:none; }
+        .tc-box input { background:transparent; border:none; color:var(--gold-bright); font-weight:800; font-size:0.72rem; width:52px; text-align:right; outline:none; }
 
         /* ── Pager (swipe entre vistas) ── */
         .pager-dots { display:flex; justify-content:center; gap:0.4rem; margin-bottom:0.9rem; }
-        .dot { width:6px; height:6px; border-radius:50%; background:#362c4a; cursor:pointer; transition:background .2s, width .2s; }
-        .dot.active { background:var(--gold-mid); width:18px; border-radius:3px; }
+        .dot { width:6px; height:6px; border-radius:50%; background:#362c4a; cursor:pointer; transition:all .25s; }
+        .dot.active { background:var(--gold-mid); width:9px; height:9px; border-radius:2px; transform:rotate(45deg);
+            box-shadow: 0 0 5px rgba(229,193,88,0.6); }
         .pages-viewport { overflow:hidden; }
         .pages-track { display:flex; width:200%; transition: transform 0.35s cubic-bezier(.4,0,.2,1); }
         .page-slide { width:50%; flex-shrink:0; min-width:0; }
 
         /* ── Cards ── */
         .grid-sum { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.9rem; margin-bottom:1.75rem; }
-        .card { padding:1.1rem 1.25rem; border-radius:8px; background: linear-gradient(145deg, #1a1428 0%, #16101f 100%);
+        .card { padding:1.1rem 1.25rem; border-radius:8px; background: linear-gradient(145deg, var(--card-g1) 0%, var(--card-g2) 100%);
             border:1px solid var(--border); position:relative; overflow:hidden; }
         .card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); }
@@ -82,7 +92,7 @@
         .card-share { font-size:0.6rem; color:#4d4266; margin-top:0.35rem; font-weight:600; }
 
         /* ── Liquidity ── */
-        .liq-box { background:#120d1e; border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:1.75rem; }
+        .liq-box { background:var(--box-bg); border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:1.75rem; }
         .section-title { font-size:0.58rem; color:var(--gold-mid); margin-bottom:0.9rem; text-transform:uppercase; letter-spacing:0.16em; font-weight:700; }
         .bar-wrapper { margin-bottom:0.75rem; }
         .bar-info { display:flex; justify-content:space-between; font-size:0.66rem; color:#666; margin-bottom:0.28rem; }
@@ -91,7 +101,7 @@
             background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright), var(--gold-light)); border-radius:3px; }
 
         /* ── Chart boxes ── */
-        .chart-box { background:#120d1e; border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:1.75rem; }
+        .chart-box { background:var(--box-bg); border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:1.75rem; }
         .chart-hdr { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.9rem; flex-wrap:wrap; gap:0.5rem; }
         .chart-hdr-left { display:flex; flex-direction:column; gap:0.25rem; }
         .chart-meta { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; }
@@ -134,7 +144,7 @@
 
         /* ── Tables ── */
         .grid-tables { display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:1.25rem; }
-        .table-box { background:#120d1e; border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; }
+        .table-box { background:var(--box-bg); border:1px solid var(--border); border-radius:8px; padding:1.1rem 1.25rem; }
         .table-hdr { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border);
             padding-bottom:0.7rem; margin-bottom:0.9rem; }
         .table-hdr-left { display:flex; flex-direction:column; gap:0.2rem; }
@@ -241,7 +251,52 @@
         [data-theme="light"] .fi-row span:last-child { color:#241c38; }
         [data-theme="light"] .chart-tooltip { background:#fff; color:#241c38; border-color:#cdb05a; box-shadow:0 4px 14px rgba(0,0,0,0.15); }
         [data-theme="light"] .chart-tooltip strong { color:#9c7a1a; }
+
+        /* ════════════════════════════════════════════════════════════════
+           PALETA: ALEGRÍA (pastel — menta / celeste / lila / rosa)
+        ════════════════════════════════════════════════════════════════ */
+        [data-palette="alegria"] {
+            --gold-mid: #4fb89e; --gold-bright: #6fd4b8; --gold-light: #b8f0dd; --gold-dark: #2e7d68;
+            --star-blue-bright: #8ec6f5; --magic-pink-bright: #f0a8c9;
+            --bg-0: #0c1420; --bg-1: #101a2c; --bg-2: #162238; --border: #223148;
+            --header-g1: #17233a; --header-g2: #0e1626; --header-border: #24314a;
+            --card-g1: #1a2b42; --card-g2: #142236; --box-bg: #101a2c;
+        }
+        [data-palette="alegria"][data-theme="light"] {
+            --bg-0: #eef9f6; --bg-1: #fff; --bg-2: #fff; --border: #d9ecf0;
+            --header-g1: #d3f5e8; --header-g2: #cfe4fb; --header-border: #c7e2e6;
+            --card-g1: #fff; --card-g2: #f2fbf7; --box-bg: #fff;
+        }
+        [data-palette="alegria"][data-theme="light"] body {
+            background: linear-gradient(160deg, #d9f7ea 0%, #cfe6fb 35%, #e4d9f7 65%, #fbdce9 100%);
+            background-attachment: fixed; color: #23324a;
+        }
+        [data-palette="alegria"][data-theme="light"] .liq-box,
+        [data-palette="alegria"][data-theme="light"] .chart-box,
+        [data-palette="alegria"][data-theme="light"] .table-box,
+        [data-palette="alegria"][data-theme="light"] .tc-box,
+        [data-palette="alegria"][data-theme="light"] .date-badge,
+        [data-palette="alegria"][data-theme="light"] .cloud-status,
+        [data-palette="alegria"][data-theme="light"] .fi-input-box,
+        [data-palette="alegria"][data-theme="light"] .modal-box { background:#fff; border-color:#dcecf5; }
+        [data-palette="alegria"][data-theme="light"] .card { border-color:#dcecf5; }
+        [data-palette="alegria"] .card-title,
+        [data-palette="alegria"][data-theme="light"] .card-title { color:#6f95a8; }
+
+        /* ── Selector de paletas ── */
+        .palette-swatch { width:22px; height:22px; border-radius:50%; border:2px solid #2a2a3a; cursor:pointer; padding:0; flex-shrink:0; }
+        .palette-swatch.active { border-color:var(--gold-bright); box-shadow:0 0 6px rgba(229,193,88,0.5); }
+        .sw-nocturno { background: linear-gradient(135deg, #0a0c1c 40%, #b38728 100%); }
+        .sw-alegria { background: linear-gradient(135deg, #6fd4b8 0%, #8ec6f5 50%, #f0a8c9 100%); }
     </style>
+
+    <script>
+        // Aplicar paleta guardada lo antes posible, antes de pintar la página
+        (function() {
+            const pal = localStorage.getItem('ec_palette') || 'nocturno';
+            document.documentElement.setAttribute('data-palette', pal);
+        })();
+    </script>
 </head>
 <body>
 
@@ -269,6 +324,8 @@
 
     <div class="toolbar">
         <button id="btn-theme" class="btn" onclick="toggleTheme()" title="Modo claro/oscuro">🌙</button>
+        <button id="pal-nocturno" class="palette-swatch sw-nocturno" onclick="setPalette('nocturno')" title="Paleta Nocturno"></button>
+        <button id="pal-alegria" class="palette-swatch sw-alegria" onclick="setPalette('alegria')" title="Paleta Alegría"></button>
         <button id="btn-undo" class="btn" onclick="ejecutarUndo()" disabled>↩</button>
         <button id="btn-redo" class="btn" onclick="ejecutarRedo()" disabled>↪</button>
         <div id="cloud-indicator" class="cloud-status" style="color:#eab308;">⏳</div>
@@ -566,6 +623,12 @@ function applyTheme(t) {
     const btn = document.getElementById('btn-theme');
     if (btn) btn.innerText = t === 'light' ? '☀️' : '🌙';
     localStorage.setItem('ec_theme', t);
+}
+function setPalette(p) {
+    document.documentElement.setAttribute('data-palette', p);
+    localStorage.setItem('ec_palette', p);
+    document.querySelectorAll('.palette-swatch').forEach(b => b.classList.toggle('active', b.id === 'pal-'+p));
+    renderChart(); renderProyeccion(); renderRetiroChart(); renderDonuts();
 }
 function toggleTheme() {
     const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -1733,6 +1796,7 @@ function agregarMesManual() {
 // ── Init ──────────────────────────────────────────────────────────────────
 window.onload = function() {
     applyTheme(localStorage.getItem('ec_theme') || 'dark');
+    document.querySelectorAll('.palette-swatch').forEach(b => b.classList.toggle('active', b.id === 'pal-'+(localStorage.getItem('ec_palette')||'nocturno')));
     cargarListas(); calcularTodo();
     descargarDesdeNube()
         .then(() => obtenerTipoCambioReal())
