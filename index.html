@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EC Capital - Live Dashboard</title>
-    <link rel="apple-touch-icon" href="icon-180-ec.png">
-    <link rel="icon" type="image/png" href="favicon-32-ec.png">
+    <link rel="apple-touch-icon" href="icon-180-ec.png?v=2">
+    <link rel="icon" type="image/png" href="favicon-32-ec.png?v=2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="EC Capital">
@@ -29,13 +29,33 @@
             box-shadow: 0 6px 32px rgba(179,135,40,0.1), inset 0 1px 0 rgba(255,255,255,0.04);
             position: relative; overflow: hidden;
         }
-        header::before {
-            content: '✦     ·        ✧      ·    ✦'; position: absolute; top: 6px; left: 0; right: 0;
-            font-size: 8px; color: var(--gold-mid); opacity: 0.35; letter-spacing: 0.4rem;
-            pointer-events: none; white-space: nowrap; overflow: hidden;
-            animation: twinkle 4.5s ease-in-out infinite;
+        header::before, header::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 5;
+            background-image:
+                radial-gradient(1.6px 1.6px at 6% 15%, var(--gold-bright), transparent),
+                radial-gradient(1.2px 1.2px at 14% 70%, var(--gold-mid), transparent),
+                radial-gradient(1.8px 1.8px at 22% 30%, var(--gold-bright), transparent),
+                radial-gradient(1.3px 1.3px at 30% 85%, var(--gold-mid), transparent),
+                radial-gradient(1.6px 1.6px at 40% 20%, var(--gold-bright), transparent),
+                radial-gradient(1.2px 1.2px at 48% 60%, var(--gold-mid), transparent),
+                radial-gradient(2px 2px at 56% 40%, var(--gold-bright), transparent),
+                radial-gradient(1.3px 1.3px at 64% 78%, var(--gold-mid), transparent),
+                radial-gradient(1.6px 1.6px at 72% 25%, var(--gold-bright), transparent),
+                radial-gradient(1.2px 1.2px at 80% 65%, var(--gold-mid), transparent),
+                radial-gradient(1.8px 1.8px at 88% 35%, var(--gold-bright), transparent),
+                radial-gradient(1.3px 1.3px at 94% 80%, var(--gold-mid), transparent),
+                radial-gradient(1.5px 1.5px at 10% 45%, var(--gold-bright), transparent),
+                radial-gradient(1.4px 1.4px at 60% 12%, var(--gold-bright), transparent);
+            background-repeat: no-repeat;
+            opacity: 0.5;
         }
-        @keyframes twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.5; } }
+        header::before { animation: twinkle 3.6s ease-in-out infinite; }
+        header::after {
+            background-position: 3% 3%;
+            animation: twinkle 4.8s ease-in-out infinite 1.4s;
+            opacity: 0.35;
+        }
+        @keyframes twinkle { 0%,100% { opacity: 0.15; } 50% { opacity: 0.6; } }
         @keyframes glowPulse {
             0%,100% { box-shadow: 0 6px 32px rgba(179,135,40,0.1), inset 0 1px 0 rgba(255,255,255,0.04); }
             50% { box-shadow: 0 6px 38px rgba(229,193,88,0.22), inset 0 1px 0 rgba(255,255,255,0.06); }
